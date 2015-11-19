@@ -38,4 +38,8 @@ namespace model {
 		}
 	}
 
+	void BloonModel::insert(int earn, int health, int shield, int speed) {
+		m_db->request("INSERT INTO Bloon VALUES()", Model::requestCallback, &m_results);
+	}
+
 }

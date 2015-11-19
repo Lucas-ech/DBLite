@@ -23,6 +23,7 @@ namespace model {
 			bool isExist() const;
 			const DbResults* getAll();
 			void freeResults(); //TODO: unique_ptr, auto free ?
+			void insert(int earn, int health, int shield, int speed);
 
 		protected:
 
