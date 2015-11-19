@@ -1,9 +1,12 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include "Include.h"
+#include <deque>
+#include <map>
 #include <memory>
 #include "Database.h"
+
+typedef std::deque<std::map<std::string, std::string>* > DbResults;
 
 namespace model {
 	class Model {
@@ -15,8 +18,8 @@ namespace model {
       		//virtual bool isExist = 0;
 
 		protected:
-			//virtual void callback(void *NotUsed, int argc, char **argv, char **azColName) = 0;
 			std::shared_ptr<Database> m_db;
+			static int requestCallback(void *array, int argc, char **argv, char **azColName);
 
 	};
 }

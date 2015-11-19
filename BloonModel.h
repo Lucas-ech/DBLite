@@ -1,15 +1,13 @@
 #ifndef BLOON_MODEL_H
 #define BLOON_MODEL_H
 
-#include <vector>
+#include <deque>
 #include <map>
 #include <memory>
 #include <string.h>
 
 #include "Database.h"
 #include "Model.h"
-
-typedef std::vector<std::map<std::string, std::string> > DbResults;
 
 namespace model {
 	struct Bloon {
@@ -24,11 +22,11 @@ namespace model {
 			void createTable();
 			bool isExist() const;
 			const DbResults* getAll();
+			void freeResults(); //TODO: unique_ptr, auto free ?
 
 		protected:
 
 		private:
-			static int requestCallback(void *array, int argc, char **argv, char **azColName);
 			DbResults m_results; //TODO: Check memory bloon allocation tas & pile depassement
 	};
 }

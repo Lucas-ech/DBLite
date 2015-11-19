@@ -1,21 +1,8 @@
 #include "BloonModel.h"
 
+//TODO: Check sqlite3_exec return value
 
 namespace model {
-	int BloonModel::requestCallback(void *array, int argc, char **argv, char **azColName)
-	{
-		DbResults *results = static_cast<DbResults*>(array);
-		//Cleaning last values
-		results->clear();
-		results->resize(argc);
-		for (int i=0; i<argc; i++)
-		{
-			(*results)[i][azColName[i]] = argv[i];
-			printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-		}
-		return 0;
-	}
-
 	BloonModel::BloonModel(std::shared_ptr<Database> db) :
 	Model(db)
 	{
@@ -41,8 +28,14 @@ namespace model {
 	}
 
 	const DbResults* BloonModel::getAll() {
-		m_db->request("SELECT * FROM Bloon", BloonModel::requestCallback, &m_results);
+		m_db->request("SELECT * FROM Bloon", Model::requestCallback, &m_results);
 		return &m_results;
+	}
+
+	void BloonModel::freeResults() {
+		for(auto res : m_results) {
+			delete res;
+		}
 	}
 
 }
