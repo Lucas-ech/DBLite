@@ -11,6 +11,7 @@ class DbRequest {
 		DbRequest(sqlite3_stmt *statement);
 		~DbRequest();
 		void bind(int index, int value);
+		void bind(int index, std::string value);
 		void exec();
 
 	private:
