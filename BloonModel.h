@@ -4,7 +4,8 @@
 #include <deque>
 #include <map>
 #include <memory>
-#include <string.h>
+#include <string>
+#include <sstream>
 
 #include "Database.h"
 #include "Model.h"
@@ -24,6 +25,9 @@ namespace model {
 			const DbResults* getAll();
 			void freeResults(); //TODO: unique_ptr, auto free ?
 			void insert(int earn, int health, int shield, int speed);
+			const DbResults* get(std::string col, std::string value);
+			const DbResults* get(std::string col, int value);
+			static void sanitize(std::string &value);
 
 		protected:
 

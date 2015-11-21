@@ -32,6 +32,21 @@ namespace model {
 		return &m_results;
 	}
 
+	const DbResults* BloonModel::get(std::string col, std::string value) {
+		sanitize(value);
+		std::stringstream sql;
+		sql << "SELECT * FROM Bloon WHERE " << col << " = '" << value << "'";
+		m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
+		return &m_results;
+	}
+
+	const DbResults* BloonModel::get(std::string col, int value) {
+		std::stringstream sql;
+		sql << "SELECT * FROM Bloon WHERE " << col << " = '" << value << "'";
+		m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
+		return &m_results;
+	}
+
 	void BloonModel::freeResults() {
 		for(auto res : m_results) {
 			delete res;
@@ -40,6 +55,15 @@ namespace model {
 
 	void BloonModel::insert(int earn, int health, int shield, int speed) {
 		m_db->request("INSERT INTO Bloon VALUES()", Model::requestCallback, &m_results);
+	}
+
+	void BloonModel::sanitize(std::string &value) {
+		std::string::size_type pos(0);
+		while((pos = value.find("'", pos)) != std::string::npos) {
+			std::cout << pos << std::endl;
+			value.replace(pos, 1, "\\'");
+			pos += 2;
+		}
 	}
 
 }
