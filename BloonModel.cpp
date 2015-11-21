@@ -28,27 +28,28 @@ namespace model {
         return m_db->request("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='table_name'", BloonModel::requestCallback);
     }
 
-    const DbResults* BloonModel::getAll()
+    const DbResults& BloonModel::getAll()
     {
         m_db->request("SELECT * FROM Bloon", Model::requestCallback, &m_results);
-        return &m_results;
+        return m_results;
     }
 
-    const DbResults* BloonModel::get(std::string col, std::string value)
+    const DbResults& BloonModel::get(std::string col, std::string value)
     {
         sanitize(value);
         std::stringstream sql;
         sql << "SELECT * FROM Bloon WHERE " << col << " = '" << value << "'";
         m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
-        return &m_results;
+        m_results[0]->at("ID");
+        return m_results;
     }
 
-    const DbResults* BloonModel::get(std::string col, int value)
+    const DbResults& BloonModel::get(std::string col, int value)
     {
         std::stringstream sql;
         sql << "SELECT * FROM Bloon WHERE " << col << " = '" << value << "'";
         m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
-        return &m_results;
+        return m_results;
     }
 
     void BloonModel::freeResults()
