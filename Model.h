@@ -9,19 +9,19 @@
 typedef std::deque<std::map<std::string, std::string>* > DbResults;
 
 namespace model {
-	class Model {
+    class Model {
 
-		public:
-			Model(std::shared_ptr<Database> db);
-			virtual ~Model();
-			virtual void createTable() = 0;
-      		//virtual bool isExist = 0;
+        public:
+            Model(std::shared_ptr<Database> db);
+            virtual ~Model();
+            virtual void createTable() = 0;
+            //virtual bool isExist = 0;
 
-		protected:
-			std::shared_ptr<Database> m_db;
-			static int requestCallback(void *array, int argc, char **argv, char **azColName);
+        protected:
+            std::shared_ptr<Database> m_db;
+            static int requestCallback(void *array, int argc, char **argv, char **azColName);
 
-	};
+    };
 }
 
 #endif

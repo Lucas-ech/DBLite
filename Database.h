@@ -9,20 +9,19 @@
 
 #include "DbRequest.h"
 
-class Database {
+class Database
+{
+    public:
+        Database(const char* dbfile);
+        ~Database();
+        bool isEmpty() const;
+        int request(const char* req, int (*callback)(void*, int, char**, char**), void* firstArg = NULL);
+        DbRequest* prepare(std::string req);
 
-	public:
-		Database(const char* dbfile);
-		~Database();
-		bool isEmpty() const;
-		int request(const char* req, int (*callback)(void*,int,char**,char**), void* firstArg = NULL);
-		DbRequest* prepare(std::string req);
-
-	private:
-		sqlite3 *m_db;
-		char *m_error;
-		bool m_isEmpty;
-
+    private:
+        sqlite3 *m_db;
+        char *m_error;
+        bool m_isEmpty;
 };
 
 #endif

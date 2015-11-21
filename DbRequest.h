@@ -5,18 +5,17 @@
 #include <memory>
 #include <sqlite3.h>
 
-class DbRequest {
+class DbRequest
+{
+    public:
+        DbRequest(sqlite3_stmt *statement);
+        ~DbRequest();
+        void bind(int index, int value);
+        void bind(int index, std::string value);
+        void exec();
 
-	public:
-		DbRequest(sqlite3_stmt *statement);
-		~DbRequest();
-		void bind(int index, int value);
-		void bind(int index, std::string value);
-		void exec();
-
-	private:
-		sqlite3_stmt *m_statement;
-
+    private:
+        sqlite3_stmt *m_statement;
 };
 
 #endif

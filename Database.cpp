@@ -24,13 +24,15 @@ Database::~Database()
     sqlite3_close(m_db);
 }
 
-bool Database::isEmpty() const {
+bool Database::isEmpty() const
+{
     return m_isEmpty;
 }
 
-int Database::request(const char* req, int (*callback)(void*,int,char**,char**), void* firstArg)
+int Database::request(const char* req, int (*callback)(void*, int, char**, char**), void* firstArg)
 {
-    if(m_isEmpty) {
+    if (m_isEmpty)
+    {
         m_isEmpty = false;
     }
 
@@ -44,7 +46,8 @@ int Database::request(const char* req, int (*callback)(void*,int,char**,char**),
     return res;
 }
 
-DbRequest* Database::prepare(std::string req) {
+DbRequest* Database::prepare(std::string req)
+{
     sqlite3_stmt *statement;
     sqlite3_prepare(m_db, req.c_str(), req.size(), &statement, NULL);
     return new DbRequest(statement);
