@@ -14,13 +14,12 @@ namespace model {
 
     void BloonModel::createTable()
     {
-        char* sql = "CREATE TABLE Bloon("  \
-                    "ID INT PRIMARY KEY    NOT NULL," \
-                    "health         INT    NOT NULL," \
-                    "speed          INT    NOT NULL," \
-                    "earn           INT    NOT NULL," \
-                    "shield         INT);";
-        m_db->request(sql, NULL);
+        m_db->request("CREATE TABLE IF NOT EXISTS Bloon("  \
+                      "ID INT PRIMARY KEY    NOT NULL," \
+                      "health         INT    NOT NULL," \
+                      "speed          INT    NOT NULL," \
+                      "earn           INT    NOT NULL," \
+                      "shield         INT);", NULL);
     }
 
     bool BloonModel::isExist() const
