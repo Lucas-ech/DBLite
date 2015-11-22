@@ -7,8 +7,6 @@
 #include <sqlite3.h>
 #include <fstream>
 
-#include "DbRequest.h"
-
 class Database
 {
     public:
@@ -16,7 +14,6 @@ class Database
         ~Database();
         bool isEmpty() const;
         int request(const char* req, int (*callback)(void*, int, char**, char**), void* firstArg = NULL);
-        DbRequest* prepare(std::string req);
 
     private:
         sqlite3 *m_db;

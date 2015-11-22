@@ -45,10 +45,3 @@ int Database::request(const char* req, int (*callback)(void*, int, char**, char*
     }
     return res;
 }
-
-DbRequest* Database::prepare(std::string req)
-{
-    sqlite3_stmt *statement;
-    sqlite3_prepare(m_db, req.c_str(), req.size(), &statement, NULL);
-    return new DbRequest(statement);
-}
