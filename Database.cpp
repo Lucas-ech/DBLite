@@ -40,8 +40,9 @@ int Database::request(const char* req, int (*callback)(void*, int, char**, char*
     if (res != SQLITE_OK)
     {
         //TODO: "Affichage" erreur
-        throw std::runtime_error("SQL error " + std::to_string(*m_error));
-        sqlite3_free(m_error); //Throwing, no freeing done
+        std::string error = std::to_string(*m_error);
+        sqlite3_free(m_error);
+        throw std::runtime_error("SQL error " + error);
     }
     return res;
 }
