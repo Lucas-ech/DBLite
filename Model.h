@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "Database.h"
+#include "QueryBuilder.h"
 
 typedef std::deque<std::map<std::string, std::string>* > DbResults;
 

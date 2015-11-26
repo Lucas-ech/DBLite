@@ -19,28 +19,37 @@ namespace model {
     const DbResults& Model::getAll()
     {
         freeResults();
-        std::stringstream sql;
-        sql << "SELECT * FROM " << m_tableName.c_str();
-        m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
+
+        QueryBuilder query("SELECT * FROM :table");
+        query.bindParam(":table", m_tableName);
+
+        m_db->request(query.getQuery().c_str(), Model::requestCallback, &m_results);
         return m_results;
     }
 
     const DbResults& Model::get(std::string col, std::string value)
     {
         freeResults();
-        sanitize(value);
-        std::stringstream sql;
-        sql << "SELECT * FROM " << m_tableName.c_str() << " WHERE " << col << " = '" << value << "'";
-        m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
+
+        QueryBuilder query("SELECT * FROM :table WHERE :col = :value");
+        query.bindParam(":table", m_tableName);
+        query.bindParam(":col", col);
+        query.bind(":value", value);
+
+        m_db->request(query.getQuery().c_str(), Model::requestCallback, &m_results);
         return m_results;
     }
 
     const DbResults& Model::get(std::string col, int value)
     {
         freeResults();
-        std::stringstream sql;
-        sql << "SELECT * FROM " << m_tableName.c_str() << " WHERE " << col << " = '" << value << "'";
-        m_db->request(sql.str().c_str(), Model::requestCallback, &m_results);
+
+        QueryBuilder query("SELECT * FROM :table WHERE :col = :value");
+        query.bindParam(":table", m_tableName);
+        query.bindParam(":col", col);
+        query.bind(":value", value);
+
+        m_db->request(query.getQuery().c_str(), Model::requestCallback, &m_results);
         return m_results;
     }
 
