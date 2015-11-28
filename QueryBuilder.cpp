@@ -12,6 +12,7 @@ QueryBuilder::~QueryBuilder()
 void QueryBuilder::bind(std::string tag, std::string value)
 {
     escape(value);
+    addQuotes(value);
     replaceTag(tag, value);
 }
 
@@ -53,8 +54,6 @@ bool QueryBuilder::replaceTag(std::string tag, std::string value)
     {
         return false;
     }
-
-    addQuotes(value);
 
     m_query.replace(pos, tag.length(), value);
     return true;
