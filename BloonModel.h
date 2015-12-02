@@ -11,11 +11,6 @@
 
 namespace model
 {
-    struct Bloon
-    {
-        unsigned int id, health, speed, earn, shield;
-    };
-
     class BloonModel : public Model
     {
         public:
