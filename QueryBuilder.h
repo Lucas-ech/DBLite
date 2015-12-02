@@ -7,7 +7,7 @@
 class QueryBuilder {
 
     public:
-        QueryBuilder(std::string query);
+        explicit QueryBuilder(std::string query);
         ~QueryBuilder();
         void bind(std::string tag, std::string value);
         void bind(std::string tag, int value);

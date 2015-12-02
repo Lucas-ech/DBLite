@@ -10,7 +10,7 @@
 class Database
 {
     public:
-        Database(const char* dbfile);
+        explicit Database(const char* dbfile);
         ~Database();
         bool isEmpty() const;
         int request(const char* req, int (*callback)(void*, int, char**, char**), void* firstArg = NULL);

@@ -19,7 +19,7 @@ namespace model
     class BloonModel : public Model
     {
         public:
-            BloonModel(std::shared_ptr<Database> db);
+            explicit BloonModel(std::shared_ptr<Database> db);
             ~BloonModel();
             void insert(int earn, int health, int shield, int speed);
 
