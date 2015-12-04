@@ -18,7 +18,6 @@ class Database
     private:
         sqlite3 *m_db;
         char *m_error;
-        bool m_isEmpty;
 };
 
 #endif
