@@ -9,6 +9,7 @@ class QueryBuilder {
     public:
         explicit QueryBuilder(std::string query);
         ~QueryBuilder();
+        void append(std::string sql);
         void bind(std::string tag, std::string value);
         void bind(std::string tag, int value);
         void bind(std::string tag, float value);

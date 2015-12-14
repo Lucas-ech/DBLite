@@ -26,24 +26,36 @@ namespace model {
         return std::move(res);
     }
 
-    Results Model::get(std::string col, std::string value)
+    Results Model::get(std::string col, std::string value, int limit)
     {
         QueryBuilder query("SELECT * FROM :table WHERE :col = :value");
         query.bindParam(":table", m_tableName);
         query.bindParam(":col", col);
         query.bind(":value", value);
+
+        if (limit > 0)
+        {
+            query.append(" LIMIT :l");
+            query.bind(":l", limit);
+        }
 
         WResults res(new DataResults);
         m_db->request(query.getQuery().c_str(), Model::requestCallback, &res);
         return std::move(res);
     }
 
-    Results Model::get(std::string col, int value)
+    Results Model::get(std::string col, int value, int limit)
     {
         QueryBuilder query("SELECT * FROM :table WHERE :col = :value");
         query.bindParam(":table", m_tableName);
         query.bindParam(":col", col);
         query.bind(":value", value);
+
+        if (limit > 0)
+        {
+            query.append(" LIMIT :l");
+            query.bind(":l", limit);
+        }
 
         WResults res(new DataResults);
         m_db->request(query.getQuery().c_str(), Model::requestCallback, &res);

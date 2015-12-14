@@ -9,6 +9,11 @@ QueryBuilder::~QueryBuilder()
 {
 }
 
+void QueryBuilder::append(std::string sql)
+{
+    m_query += sql;
+}
+
 void QueryBuilder::bind(std::string tag, std::string value)
 {
     escape(value);

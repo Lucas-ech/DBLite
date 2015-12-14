@@ -22,10 +22,10 @@ namespace model {
             Model(std::shared_ptr<Database> db, std::string tableName);
             virtual ~Model();
             std::string getTableName() const;
-            Results getAll(); //TODO: make const
-            Results get(std::string col, std::string value);
-            Results get(std::string col, int value);
-            void freeResults(); //TODO: unique_ptr, auto free ?
+            Results getAll();
+            Results get(std::string col, std::string value, int limit = -1);
+            Results get(std::string col, int value, int limit = -1);
+            void freeResults();
             static void sanitize(std::string &value);
 
         protected:
