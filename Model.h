@@ -25,11 +25,10 @@ namespace model {
             Results getAll();
             Results get(std::string col, std::string value, int limit = -1);
             Results get(std::string col, int value, int limit = -1);
-            void freeResults();
-            static void sanitize(std::string &value);
 
         protected:
             virtual void createTable() = 0;
+            void prepareSelect(QueryBuilder &query, std::string col = "", int limit = -1, std::string condTag = ":value");
             static int requestCallback(void *array, int argc, char **argv, char **azColName);
             std::shared_ptr<Database> m_db;
             std::string m_tableName;

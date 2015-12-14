@@ -5,8 +5,18 @@ m_query(query)
 {
 }
 
+QueryBuilder::QueryBuilder() :
+m_query{}
+{
+}
+
 QueryBuilder::~QueryBuilder()
 {
+}
+
+void QueryBuilder::setQuery(std::string sql)
+{
+    m_query = sql;
 }
 
 void QueryBuilder::append(std::string sql)
