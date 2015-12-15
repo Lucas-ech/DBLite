@@ -70,8 +70,8 @@ namespace model {
     int Model::requestCallback(void *array, int argc, char **argv, char **azColName)
     {
         WResults *results = static_cast<WResults*>(array);
-        (*results)->push_back({});
-        for (int i=0; i<argc; i++)
+        (*results)->emplace_back();
+        for (int i(0); i < argc; ++i)
         {
             (*results)->back()[azColName[i]] = argv[i];
         }
